@@ -1,0 +1,9 @@
+select * from accounts;
+
+delete from django_migrations where app='accounts';
+
+select * from accounts LEFT JOIN accounts_groups ON accounts.id = accounts_groups.account_id LEFT JOIN
+    auth_group ON accounts_groups.group_id=auth_group.id;
+
+select accounts.username, accounts.id from accounts LEFT JOIN accounts_groups ON
+    accounts.id = accounts_groups.account_id LEFT JOIN auth_group ON accounts_groups.group_id=auth_group.id;

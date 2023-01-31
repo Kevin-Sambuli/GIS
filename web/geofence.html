@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secured layer access - Krishna Lodha</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+</head>
+<body>
+<div id="map" class="map"></div>
+<div id="info">&nbsp;</div>
+<script>
+
+    /*var layerList = [];
+var loginInfo = ["admin", "geoserver"];
+var geoserverURL = "http://127.0.0.1/geoserver";
+var raslist = document.getElementById("rasList");
+var veclist = document.getElementById("vecList");
+
+
+$.ajax({
+url: geoserverURL + '/rest/layers.json',
+type: 'GET',
+dataType: 'json',
+contentType: "application/json",
+beforeSend: function(xhr) {
+     xhr.setRequestHeader ("Authorization", "Basic " + btoa(loginInfo[0] + ":" + loginInfo[1]));
+},
+success: function(data){
+    for (var i = 0; i < data.layers.layer.length; i++) {
+        layerList.push([data.layers.layer[i].name, data.layers.layer[i].href]);
+    }
+},
+async: false
+});
+
+for (var i = 0; i < layerList.length; i++) {
+getType(layerList[i][1], i)
+}
+
+// wait for all ajax elements to stop to proceed with the COMPLETED array - otherwise the asynchronus style of ajax will destroy it all ..
+$(document).ajaxStop(function() {
+for (var i = 0; i < layerList.length; i++) {
+    var option = document.createElement("option");
+    //option.setAttribute("value", "test" + i);
+    option.text = layerList[i][0];
+    if (layerList[i][1] == "RASTER") {
+        raslist.appendChild(option);
+    } else {
+        veclist.appendChild(option);
+    }
+}
+});
+
+
+function getType(url, i) {
+$.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    contentType: "application/json",
+    beforeSend: function(xhr) {
+         xhr.setRequestHeader ("Authorization", "Basic " + btoa(loginInfo[0] + ":" + loginInfo[1]));
+    },
+    success: function(data){
+        layerList[i][1] = data.layer.type;
+    }
+});
+}*/
+
+
+    (function (open) {
+        XMLHttpRequest.prototype.open = function () {
+            var method = arguments[0].toLowerCase();
+            var url = arguments[1];
+
+            if (url == undefined) {
+                console.log(arguments)
+            }
+            if ((method === 'get' || method === 'post')) {
+                this.withCredentials = true;
+                open.apply(this, arguments);
+                this.setRequestHeader("Authorization", "Basic " + btoa(user + ":" + pwd));
+            } else {
+                open.apply(this, arguments);
+            }
+        };
+    })(XMLHttpRequest.prototype.open);
+
+
+    var user = 'poi' //geoserver username
+    var pwd = 'geoserver'//geoserver password
+
+    function xhrTileLoadFunction(tile, src) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function () {
+            var arrayBufferView = new Uint8Array(this.response);
+            var blob = new Blob([arrayBufferView], {type: 'image/png'});
+            var urlCreator = window.URL || window.webkitURL;
+            var imageUrl = urlCreator.createObjectURL(blob);
+            tile.getImage().src = imageUrl;
+        };
+        xhr.open("GET", src);
+        xhr.send();
+    }
+
+
+    var wmsSource = new ol.source.TileWMS({
+        url: 'http://localhost:8080/geoserver/tiger/wms',
+        params: {'LAYERS': 'tiger:poi'},
+        tileLoadFunction: xhrTileLoadFunction,
+        serverType: 'geoserver',
+        crossOrigin: 'use-credentials'
+    });
+
+    var wmsLayer = new ol.layer.Tile({
+        source: wmsSource
+    });
+
+    var view = new ol.View({
+        projection: 'EPSG:4326',
+        center: [-74, 40],
+        zoom: 5
+    });
+
+    var map = new ol.Map({
+        layers: [new ol.layer.Tile({
+            source: new ol.source.OSM()
+        }),
+            wmsLayer],
+        target: 'map',
+        view: view
+    });
+
+    //on click info
+    map.on('singleclick', function (evt) {
+        document.getElementById('info').innerHTML = '';
+        var viewResolution = /** @type {number} */ (view.getResolution());
+        var url = wmsSource.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:4326',
+            {'INFO_FORMAT': 'application/json'});
+        if (url) {
+            fetch(url, {
+                headers: new Headers({
+                    'Authorization': 'Basic ' + btoa(user + ":" + pwd),
+                }),
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+        }
+    });
+
+</script>
+</body>
+</html>

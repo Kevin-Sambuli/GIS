@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./static/libs/v6.5.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="./static/libs/v6.5.0/examples/resources/layout.css" type="text/css">
+    <link rel="stylesheet" href="./static/libs/ol-layerswitcher/dist/ol-layerswitcher.css"/>
+
+
+    <script src="./static/libs/v6.5.0/build/ol.js"></script>
+    <script src="./static/libs/ol-layerswitcher/dist/ol-layerswitcher.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- <link rel="stylesheet" href="./libs/bootstrap.min.css">
+      <script type="text/javascript" src="./libs/bootstrap.min.js"></script> -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./static/libs/jquery-ui/jquery-ui.css">
+    <script src="./static/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="./static/libs/jquery-ui/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Web GIS</title>
+</head>
+
+<body>
+<div id="title">
+    <marquee behavior="scroll" direction="left"><h5><b>Web based GIS Application</b></h5></marquee>
+</div>
+<div id="map">
+
+    <form id="measure">
+        <label>Measurement&nbsp;</label>
+        <select id="measuretype">
+            <option value="select">Select Measure option</option>
+            <option value="length">Length (LineString)</option>
+            <option value="area">Area (Polygon)</option>
+            <option value="clear">Clear Measurement</option>
+        </select>
+    </form>
+    <form id="getinfo">
+        <label>GetFeatureinfo&nbsp;</label>
+        <select id="getinfotype">
+            <option value="select">Select option</option>
+            <option value="activate_getinfo">Activate GetFeatureinfo</option>
+            <option value="deactivate_getinfo">Deactivate GetFeatureinfo</option>
+        </select>
+    </form>
+    <button onclick="wms_layers()" id="wms_layers_btn">Available WMS Layers</button>
+    <button onclick="clear_all()" id="clear_btn">Clear</button>
+
+</div>
+
+<div id="popup" class="ol-popup">
+    <a title="close" href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+<div id="info">&nbsp;</div>
+
+
+<div id="legend"></div>
+<div id="query_tab">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#form">Select by Attributes</a></li>
+        <li><a data-toggle="tab" href="#form1">Select by Draw</a></li>
+
+    </ul>
+
+
+    <div class="tab-content">
+        <div id="form" class="tab-pane fade in active">
+            <label for="layer">Select Layer</label>
+            <select class="form-control" id="layer" name="layer">
+                <option value="">Select Layer</option>
+            </select>
+            <br>
+            <label for="attributes">Select attribute</label>
+            <select class="form-control" id="attributes" name="attributes">
+                <option value="">Select Attributes</option>
+            </select>
+            <br>
+            <label for="operator">Select operator</label>
+            <select class="form-control" id="operator" name="operator">
+                <option value="">Select operator</option>
+            </select>
+            <br>
+
+            <label for="value">Enter Value</label>
+            <input type="text" class="form-control" id="value" name="value">
+            <br>
+            <button class="btn btn-success" onclick="query()">Load Query</button>
+        </div>
+        <div id="form1" class="tab-pane fade">
+            <label for="layer1">Select Layer</label>
+            <select class="form-control" id="layer1" name="layer1">
+                <option value="">Select Layer</option>
+            </select>
+            <br>
+            <label for="attributes">Select attribute</label>
+
+            <label for="draw_type">Geometry type &nbsp;</label>
+            <select class="form-control" id="draw_type" name="draw_type">
+                <option value="select">Select Shape</option>
+                <option value="Square">Square</option>
+                <option value="Box">Box</option>
+                <option value="Polygon">Polygon</option>
+                <option value="Star">Star</option>
+                <option value="clear">Clear</option>
+            </select>
+            <br>
+
+        </div>
+    </div>
+
+</div>
+<div id="table_data"></div>
+<div id="wms_layers_window" title="Available WMS Layers" style="display:none"></div>
+<table id="table_wms_layers" class="table-bordered">
+</table>
+
+<script src="main.js"></script>
+
+</body>
+</html>

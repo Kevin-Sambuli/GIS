@@ -1,0 +1,9 @@
+.layout {
+    /*position: fixed;*/
+    background-color: orange;
+    margin: 0px;
+    width: 100%;
+    padding: 0px;
+    height: 100%;
+    /*display: flex;*/
+}

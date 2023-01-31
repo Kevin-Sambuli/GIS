@@ -1,0 +1,67 @@
+from django.contrib.auth.models import Group, Permission
+from django.db import migrations
+from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import get_object_or_404
+
+
+def create_groups(apps, schema_migration):
+    """getting the model object"""
+    AccountModel = apps.get_model('accounts', 'Account')
+    LandownerModel = apps.get_model('accounts', 'Landowner')
+    AgentModel = apps.get_model('accounts', 'Agent')
+    SurveyorModel = apps.get_model('accounts', 'Surveyor')
+    ManagerModel = apps.get_model('accounts', 'Manager')
+
+    """creating groups in the database"""
+    land_group, created = Group.objects.get_or_create(name='landowners')
+    surveyor_group, created = Group.objects.get_or_create(name='surveyors')
+    agent_group, created = Group.objects.get_or_create(name='agents')
+    manager_group, created = Group.objects.get_or_create(name='managers')
+
+    # land owner perms
+    create_landowner = Permission.objects.get(codename='can_create_account')
+    view_landowner = Permission.objects.get(codename='can_view_account')
+    process_surveys = Permission.objects.get(codename='can_process_surveys')
+
+    agent_landowner = Permission.objects.get(codename='can_manage_landowner')
+
+    # managers permissions
+    manage_agent = Permission.objects.get(codename='can_manage_landowners')
+    manage_landowners = Permission.objects.get(codename='can_manage_agents')
+
+    land_perms = [
+        view_landowner,
+        create_landowner
+    ]
+    surveyor_perms = [
+        view_landowner,
+        process_surveys
+    ]
+    agent_perms = [
+        view_landowner,
+        create_landowner,
+        agent_landowner,
+    ]
+    manager_perms = [
+        view_landowner,
+        create_landowner,
+        process_surveys,
+        agent_landowner,
+        manage_agent,
+        manage_landowners
+    ]
+
+    land_group.permissions.set(land_perms)
+    surveyor_group.permissions.set(surveyor_perms)
+    agent_group.permissions.set(agent_perms)
+    manager_group.permissions.set(manager_perms)
+
+
+class Migration(migrations.Migration):
+    dependencies = [
+        ('accounts', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.RunPython(create_groups)
+    ]

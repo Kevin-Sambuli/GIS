@@ -1,0 +1,16 @@
+
+osm2pgsql -s -H localhost -P 5432 -U postgres -W -d osm E:\OSM_india_data\india-latest.osm.pbf
+--hstore after user
+
+
+# we added an environment block under the celery service and the reason is celery must access the db while running.
+#  If we don’t provide the database credentials then it will throw a connection exception.
+
+#    command: >
+#            sh -c "osm2pgsql -s -H localhost -P 5432 -U admin -W -d osm ./home/country.pbf -S ./home/default.style"
+
+#    command: >
+#        sh -c "osm2pgsql -s -H localhost -P 5432 -U postgres -W -d osm ./osm/osm2pgsql-bin/country.pbf --hstore after user "
+#               sudo -u postgres createdb osm
+#                sudo -u postgres psql osm --command='CREATE EXTENSION postgis;'
+#                sudo -u postgres psql osm --command='CREATE EXTENSION hstore;' "

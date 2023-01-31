@@ -1,0 +1,211 @@
+  .sr-only {
+    display: none;
+  }
+
+.leaflet-container {
+  width: 100%;
+  position: relative;
+  height: calc(100vh - 56px);
+  z-index: 1;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #088151;
+  /*  background-color: rgba(150, 134, 45, 1);*/
+    color:#fff;
+
+  /*  color: #880000;*/
+    /*width: 400px;*/
+    /*height: 300px;*/
+
+    font-size:16px;
+    line-height:24px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px
+  }
+
+.leaflet-popup-tip-container {
+    width:30px;
+    height:15px;
+  }
+
+.leaflet-popup-tip {
+    background: #088151;
+    border: none;
+    box-shadow: none;
+  }
+
+.leaflet-popup-content {
+        padding: 10px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        overflow:  auto;
+        margin-right: 10px;
+        margin-left: 10px;
+        max-width: 500px;
+}
+
+.leaflet-popup-content hr {
+    height: 11px;
+    background-color: #ccc;
+    border: none;
+}
+
+.leaflet-popup-content input[type=text] input[type=number] {
+        width: 100%;
+        height: 3px;
+        /*padding: 15px;*/
+    text-align: center;
+        margin: 5px 0 22px 5px;
+        overflow:  auto;
+}
+
+.leaflet-popup-content input {
+    height: 30px;
+    background-color: whitesmoke;
+    border: 0;
+    border-radius: 30px ;
+    letter-spacing: 1px;
+    outline: 0;
+}
+
+
+
+
+/*.leaflet-control-layers-expanded {*/
+/*  width: 100% !important;*/
+/*  padding: 5px;*/
+/*  background-color: transparent;*/
+/*  border: none !important;*/
+/*}*/
+
+/*.leaflet-control-layers-list {*/
+/*  font-size: 16px;*/
+/*  line-height: 12px;*/
+/*  background: none !important;*/
+/*  color: green;*/
+/*}*/
+
+/*.leaflet-draw-toolbar-top {*/
+/*    margin-top: 0;*/
+/*    !*border: 2px solid rgba(0,0,0,0.2);*!*/
+/*    border: none;*/
+/*    background-color: yellowgreen !important;*/
+/*}*/
+
+
+/*.leaflet-draw-edit-edit {*/
+/*    background-position: 0 -1px;*/
+/*    margin: 7px;*/
+/*    background-color:greenyellow !important;*/
+/*    box-shadow: 1px 1px 1px 1.5px rgba(0, 0, 0, 0.5);*/
+/*}*/
+
+  /*.leaflet-container {*/
+      /*background: black;*/
+  /*}*/
+
+  .leaflet-bar {
+    border: none !important;
+
+}
+
+.leaflet-control-layers{
+    padding: 4px;
+    border-radius:50px !important;
+    background-color: #9ecae1 !important;
+}
+.leaflet-control-layers-list {
+    position: fixed;
+    padding: 10px;
+    color: #122b40;
+    font-weight: bold;
+}
+.leaflet-control-layers-base {
+    color: #122b40;
+    font-weight: bold;
+}
+
+
+/*.leaflet-control-zoom {*/
+/*    margin: 7px;*/
+/*}*/
+.leaflet-control-zoom-in{
+    margin-bottom: 15px;
+}
+.leaflet-control-zoom-in, .leaflet-control-zoom-out  {
+    border-radius: 50px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+    background-color: greenyellow !important;
+}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom:3px;
+    border: none;
+	border-radius:50% !important;
+}
+
+
+/*.leaflet-control-layer-list {*/
+/*    line-height:10px;*/
+/*    background-color: yellowgreen;*/
+/*}*/
+
+
+.basic-functions{
+    position: absolute;
+    top: 100px;
+    left: 6px;
+}
+
+.map-functions{
+    position: absolute;
+    top: 80px;
+    right: 6px;
+}
+
+.basic-functions .btns:hover , .map-functions .controls:hover {
+	color: #000 ;
+	background-color: transparent;
+	text-shadow:teal;
+}
+
+.basic-functions .btns, .map-functions .controls{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: greenyellow;
+    margin: 7px;
+    padding: 5px;
+    border-radius:50px;
+    box-shadow: 1px 1px 1px 1.5px rgba(0, 0, 0, 0.5);
+}
+
+.basic-functions .fas, .map-functions .fas{
+    font-size: 1.2rem;
+    position: absolute;
+    color:steelblue;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.map-coordinate{
+    overflow-y: auto;
+    text-decoration: yellowgreen;
+    padding: 5px 15px;
+    color: whitesmoke;
+    position: absolute;
+    bottom: 10px;
+    left: 800px;
+    background-color: rgba(69, 67, 69, 0.9);
+    border-radius: 50px;
+    font-size: 1em;
+}
