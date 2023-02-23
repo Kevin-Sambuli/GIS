@@ -23,8 +23,8 @@ networks:
     driver: bridge
     name: api
   website:
-#    external: true
-    name: website
+    external: true
+#    name: website
 
 
 services:
@@ -65,6 +65,7 @@ services:
       - "80:80"
     networks:
       - api
+      - website
 
   postgres-db:
     restart: "on-failure"
