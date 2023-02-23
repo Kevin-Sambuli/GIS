@@ -23,7 +23,8 @@ networks:
     driver: bridge
     name: api
   website:
-    external: true
+#    external: true
+    name: website
 
 
 services:
