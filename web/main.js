@@ -1,7 +1,8 @@
 // var serverPort = 'localhost:8081/geoserver/';
 // var serverPort = 'localhost/geoserver/';
 
-var serverPort = 'geospatialdev.com/geoserver/';
+var serverPort = 'web.geospatialdev.com/geoserver/';
+// var serverPort = 'geospatialdev.com/geoserver/';
 // var serverPort = 'geospatialdev.com:8081/geoserver/';
 
 // url: 'http://localhost/geoserver/data/wms',
@@ -49,14 +50,11 @@ closer.onclick = function () {
 };
 
 var view = new ol.View({
-    projection: 'EPSG:4326',
-    var view = new ol.View({
     extent: [27.080, -4.930, 48.500, 5.690],
     projection: projectionName,
     center: [37.73, 0.42],
     zoom : 5,
     minZoom : 4
-});
 });
 
 
