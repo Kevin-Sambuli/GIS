@@ -172,7 +172,7 @@ var osmKenyaTile = new ol.layer.Tile({
     title: 'Kenya',
     type: 'base',
     source: new ol.source.WMTS({
-        url: 'http://' + serverPort + 'gwc/service/wmts',
+        url: 'https://' + serverPort + 'gwc/service/wmts',
         layer: 'osm:kenya',
         format: 'image/png',
         matrixSet: projectionName, //'EPSG:4326'
@@ -198,7 +198,7 @@ var kenyRoadsTile = new ol.layer.Image({
     title: "roads",
     visible: true,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + roads, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -208,7 +208,7 @@ var populationTile = new ol.layer.Tile({
     title: "population",
     visible: false,
     source: new ol.source.TileWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + poplationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -220,7 +220,7 @@ var sublocationTile = new ol.layer.Tile({
     // minZoom: 15,
     // maxZoom: 25,
     source: new ol.source.TileWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + sublocationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -232,7 +232,7 @@ var locationTile = new ol.layer.Tile({
     minZoom: 10,
     maxZoom: 20,
     source: new ol.source.TileWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + locationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -244,7 +244,7 @@ var subCountyTile = new ol.layer.Image({
     // minZoom: 8,
     // maxZoom: 14,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + subCountyLayer, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -256,7 +256,7 @@ var countyTile = new ol.layer.Image({
     // minZoom: 2,
     // maxZoom: 9,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         serverType: 'geoserver',
         params: {'LAYERS': geoserverWorkspace + ':' + countyLayerName, 'TILED': true},
     })
@@ -379,7 +379,7 @@ function legend() {
     var ar = [];
     var i;
     for (i = 0; i < no_layers; i++) {
-        ar.push("http://" + serverPort + geoserverWorkspace + "/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlayGroup.getLayers().item(i).get('title'));
+        ar.push("https://" + serverPort + geoserverWorkspace + "/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlayGroup.getLayers().item(i).get('title'));
     }
     for (i = 0; i < no_layers; i++) {
         var head = document.createElement("p");
@@ -687,7 +687,7 @@ featureInfoButton.addEventListener("click", () => {
 //             layer_title[i] = overlayGroup.getLayers().item(i).get('title');
 //
 //             wmsSource[i] = new ol.source.ImageWMS({
-//                 url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+//                 url: 'https://' + serverPort + geoserverWorkspace + '/wms',
 //                 params: {'LAYERS': layer_title[i]},
 //                 serverType: 'geoserver',
 //                 crossOrigin: 'anonymous'
@@ -1092,7 +1092,7 @@ function add_layer() {
         title: name[1],
         visible: true,
         source: new ol.source.ImageWMS({
-            url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+            url: 'https://' + serverPort + geoserverWorkspace + '/wms',
             params: {'LAYERS': layer_name},
             ratio: 1,
             serverType: 'geoserver'
@@ -1104,7 +1104,7 @@ function add_layer() {
     overlayGroup.getLayers().push(layer_wms)
     console.log(overlayGroup.getLayers())
 
-    var url = 'http://' + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
+    var url = 'https://' + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
 
     // format for reading Map server getcapabilities for wms
     var parser = new ol.format.WMSCapabilities();
@@ -1151,8 +1151,8 @@ function wms_layers() {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            // url: "http://geospatialdev.com/geoserver/data/wms?request=getCapabilities",
-            url: "http://" + serverPort + geoserverWorkspace + "/wms?request=getCapabilities",
+            // url: "https://geospatialdev.com/geoserver/data/wms?request=getCapabilities",
+            url: "https://" + serverPort + geoserverWorkspace + "/wms?request=getCapabilities",
             dataType: "xml",
             success: function (xml) {
                 $('#table_wms_layers').empty();
@@ -1327,7 +1327,7 @@ function addMapLayerList(selectElementName) {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
+            url: "https://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
             dataType: "xml",
             success: function (xml) {
                 var select = $('#' + selectElementName);
@@ -1555,7 +1555,7 @@ function addMapLayerList_spQry() {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
+            url: "https://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
             dataType: "xml",
             success: function (xml) {
                 var select = $('#buffSelectLayer');
@@ -1638,7 +1638,7 @@ startEditingButton.addEventListener("click", () => {
             source: new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'http://' + serverPort + geoserverWorkspace + '/ows?service=WFS&' +
+                    return 'https://' + serverPort + geoserverWorkspace + '/ows?service=WFS&' +
                         'version=1.0.0&request=GetFeature&typeName=' + editLayer + '&' +
                         'outputFormat=application/json&srsname=EPSG:4326&' +
                         'bbox=' + extent.join(',') + ',EPSG:4326';
@@ -1884,7 +1884,7 @@ var transactWFS = function (mode, f) {
 
     var node;
     var formatGML = new ol.format.GML({
-        // featureNS: 'http://argeomatica.com',
+        // featureNS: 'https://argeomatica.com',
         featureNS: geoserverWorkspace,
         // featureType: 'playa_sample',
         featureType: editLayer,
@@ -1925,7 +1925,7 @@ var transactWFS = function (mode, f) {
     }
     // payload = payload.replace(/feature:editLayer/g, editLayer);
 
-    $.ajax("http://" + serverPort + geoserverWorkspace + "/wfs", {
+    $.ajax("https://" + serverPort + geoserverWorkspace + "/wfs", {
         type: 'POST',
         dataType: 'xml',
         processData: false,
@@ -2332,7 +2332,7 @@ function zoomToFeature(featureName, layerName, attributeName) {
     var value_attribute = attributeName;
     var value_operator = "==";
     var value_txt = featureName.innerHTML;
-    var url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
+    var url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
     // console.log(url);
     newaddGeoJsonToMap(url);
 }
@@ -2369,8 +2369,8 @@ $(function () {
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                //url: http://geospatialdev.com/geoserver/data/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=population
-                url: "http://" + serverPort + geoserverWorkspace + "/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" + value_layer,
+                //url: https://geospatialdev.com/geoserver/data/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=population
+                url: "https://" + serverPort + geoserverWorkspace + "/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" + value_layer,
                 dataType: "xml",
                 success: function (xml) {
 
@@ -2455,7 +2455,7 @@ $(function () {
             } else {
                 value_txt = value_txt;
             }
-            var url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
+            var url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
 
             // Adding the filtered geojson data to the Map (application/json)
             newaddGeoJsonToMap(url);
@@ -2566,12 +2566,12 @@ $(function () {
 
                 var distanceUnit = document.getElementById("distanceUnits");
                 var value_distanceUnit = distanceUnit.options[distanceUnit.selectedIndex].value;
-                url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=DWITHIN(geom," + markerType + "(" + coordList + ")," + value_dist + "," + value_distanceUnit + ")&outputFormat=application/json";
+                url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=DWITHIN(geom," + markerType + "(" + coordList + ")," + value_dist + "," + value_distanceUnit + ")&outputFormat=application/json";
 
             } else if (value_attribute == 'Intersecting') {
-                url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=INTERSECTS(geom," + markerType + "(" + coordList + "))&outputFormat=application/json";
+                url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=INTERSECTS(geom," + markerType + "(" + coordList + "))&outputFormat=application/json";
             } else if (value_attribute == 'Completely Within') {
-                url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=WITHIN(geom," + markerType + "(" + coordList + "))&outputFormat=application/json";
+                url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=WITHIN(geom," + markerType + "(" + coordList + "))&outputFormat=application/json";
             }
 
             // Adding the filtered geojson data to the Map (application/json)

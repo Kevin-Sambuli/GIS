@@ -21,4 +21,6 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 
 # certbot --nginx -d geospatialdev.com -d www.geospatialdev.com -d web.geospatialdev.com
+# Enter "c"
+# certbot --nginx -d geospatialdev.com -d www.geospatialdev.com -d web.geospatialdev.com --register-unsafelywithout-email
 

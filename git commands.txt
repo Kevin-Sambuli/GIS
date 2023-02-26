@@ -1,0 +1,16 @@
+check updates
+git fetch
+git diff
+git merge
+
+
+checkout files with errors
+git checkout -- default.conf
+
+force updates
+git fetch --all
+git reset --hard origin/master
+
+force push
+$ git push --force origin <branch-name>
+

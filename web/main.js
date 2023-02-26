@@ -5,7 +5,7 @@ var serverPort = 'web.geospatialdev.com/geoserver/';
 // var serverPort = 'geospatialdev.com/geoserver/';
 // var serverPort = 'geospatialdev.com:8081/geoserver/';
 
-// url: 'http://localhost/geoserver/data/wms',
+// url: 'https://localhost/geoserver/data/wms',
 
 var geoserverWorkspace = 'data';
 var countyLayerName = 'counties';
@@ -107,7 +107,7 @@ var osmTile = new ol.layer.Tile({
     title: 'Kenya',
     type: 'base',
     source: new ol.source.WMTS({
-        url: 'http://' + serverPort + 'gwc/service/wmts',
+        url: 'https://' + serverPort + 'gwc/service/wmts',
         layer: 'osm:kenya',
         format: 'image/png',
         matrixSet: projectionName, //'EPSG:4326'
@@ -144,7 +144,7 @@ var countiesLayer = new ol.layer.Image({
     minZoom: 2,
     maxZoom: 9,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': countyLayerName},
         serverType: 'geoserver',
         ratio: 1
@@ -156,7 +156,7 @@ var subCountyLayer = new ol.layer.Image({
     minZoom: 8,
     maxZoom: 14,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': subCountiesLayerName},
         serverType: 'geoserver',
         ratio: 1
@@ -168,8 +168,8 @@ var locationLayer = new ol.layer.Image({
     minZoom: 10,
     maxZoom: 20,
     source: new ol.source.ImageWMS({
-        // url: 'http://localhost/geoserver/wms',
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        // url: 'https://localhost/geoserver/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': locationLayerName},
         serverType: 'geoserver',
         ratio: 1
@@ -181,7 +181,7 @@ var subLocationLayer = new ol.layer.Image({
     minZoom: 15,
     maxZoom: 25,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': subLocationLayerName},
         serverType: 'geoserver',
         ratio: 1
@@ -202,7 +202,7 @@ var population = new ol.layer.Image({
     title: 'population',
     visible: false,
     source: new ol.source.ImageWMS({
-        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': 'population'},
         serverType: 'geoserver',
         ratio: 1
@@ -223,7 +223,7 @@ var admin = new ol.layer.Tile({
     title: "administration",
     visible: false,
     source: new ol.source.TileWMS({
-        url: 'http://' + serverPort  + geoserverWorkspace + '/wms',
+        url: 'https://' + serverPort  + geoserverWorkspace + '/wms',
         params: { 'LAYERS': adminLayerName, 'TILED': true },
         serverType: 'geoserver',
     })
@@ -300,7 +300,7 @@ function legend() {
     var ar = [];
     var i;
     for (i = 0; i < no_layers; i++) {
-        ar.push("http://" + serverPort + geoserverWorkspace + "/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
+        ar.push("https://" + serverPort + geoserverWorkspace + "/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=" + overlays.getLayers().item(i).get('title'));
         //alert(overlays.getLayers().item(i).get('title'));
     }
     for (i = 0; i < no_layers; i++) {
@@ -350,7 +350,7 @@ function getinfo(evt) {
             layer_title[i] = overlays.getLayers().item(i).get('title');
             //alert(layer_title[i]);
             wmsSource[i] = new ol.source.ImageWMS({
-                url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+                url: 'https://' + serverPort + geoserverWorkspace + '/wms',
                 params: {'LAYERS': layer_title[i]},
                 serverType: 'geoserver',
                 crossOrigin: 'anonymous'
@@ -767,8 +767,8 @@ function wms_layers() {
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            // url: "http://geospatialdev.com/geoserver/data/wms?request=getCapabilities",
-            url: "http://" + serverPort + geoserverWorkspace + "/wms?request=getCapabilities",
+            // url: "https://geospatialdev.com/geoserver/data/wms?request=getCapabilities",
+            url: "https://" + serverPort + geoserverWorkspace + "/wms?request=getCapabilities",
             dataType: "xml",
             success: function (xml) {
                 $('#table_wms_layers').empty();
@@ -860,7 +860,7 @@ function add_layer() {
         title: name[1],
         visible: true,
         source: new ol.source.ImageWMS({
-            url: 'http://' + serverPort + geoserverWorkspace + '/wms',
+            url: 'https://' + serverPort + geoserverWorkspace + '/wms',
             params: {'LAYERS': layer_name},
             ratio: 1,
             serverType: 'geoserver'
@@ -872,7 +872,7 @@ function add_layer() {
     // overlays.getLayers().push(layer_wms);
     map.addLayer(layer_wms);
 
-    var url = 'http://' + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
+    var url = 'https://' + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
 
     // format for reading Map server getcapabilities for wms
     var parser = new ol.format.WMSCapabilities();
@@ -911,7 +911,7 @@ function add_layer() {
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "http://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
+        url: "https://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
         dataType: "xml",
         success: function (xml) {
 
@@ -948,7 +948,7 @@ $(function () {
         $(document).ready(function () {
             $.ajax({
                 type: "GET",
-                url: "http://" + serverPort + geoserverWorkspace + "/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" + value_layer,
+                url: "https://" + serverPort + geoserverWorkspace + "/wfs?service=WFS&request=DescribeFeatureType&version=1.1.0&typeName=" + value_layer,
                 dataType: "xml",
                 success: function (xml) {
 
@@ -1225,7 +1225,7 @@ function query() {
         value_txt = value_txt;
     }
 
-    var url = "http://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
+    var url = "https://" + serverPort + geoserverWorkspace + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + value_layer + "&CQL_FILTER=" + value_attribute + "+" + value_operator + "+'" + value_txt + "'&outputFormat=application/json"
 //alert(url);
 
     var style = new ol.style.Style({
@@ -1344,7 +1344,7 @@ function query() {
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "http://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
+        url: "https://" + serverPort + geoserverWorkspace + "/wfs?request=getCapabilities",
         dataType: "xml",
         success: function (xml) {
             var select = $('#layer1');
@@ -1460,7 +1460,7 @@ function add_draw_Interaction() {
                 var layer_name = document.getElementById("layer1");
                 var value_layer = layer_name.options[layer_name.selectedIndex].value;
 
-                var url = "http://" + serverPort + geoserverWorkspace + "/wfs?request=GetFeature&version=1.0.0&typeName=" + value_layer + "&outputFormat=json&cql_filter=INTERSECTS(the_geom," + wkt + ")";
+                var url = "https://" + serverPort + geoserverWorkspace + "/wfs?request=GetFeature&version=1.0.0&typeName=" + value_layer + "&outputFormat=json&cql_filter=INTERSECTS(the_geom," + wkt + ")";
                 //alert(url);
                 /*var style = new ol.style.Style({
                       fill: new ol.style.Fill({
