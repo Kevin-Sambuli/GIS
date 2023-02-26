@@ -82,13 +82,10 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      #   - certs:/etc/nginx/certs
-      #       - html:/usr/share/nginx/html
-      #       - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs
       - ./docker/certbot/conf:/etc/letsencrypt
       - ./docker/certbot/www:/var/www/certbot
-    command: certonly --webroot --webroot-path=/var/www/certbot --email info@geospatialdev.com -d geospatialdev.com  -d www.geospatialdev.com
-    #    command: certonly --webroot -w /var/www/certbot --force-renewal --email {EMAIL} -d {DOMAIN} --agree-tos
+    command: certonly --webroot --webroot-path=/var/www/certbot --email info@geospatialdev.com --agree-tos --no-eff-email -d geospatialdev.com  -d www.geospatialdev.com
 #    command: certonly --webroot -w /var/www/certbot --force-renewal --email info@geospatialdev.com -d geospatialdev.com  -d www.geospatialdev.com -d web.geospatialdev.com  -d www.web.geospatialdev.com --agree-tos
 
   postgres-db:
