@@ -1,16 +1,27 @@
 check updates
-git fetch
-git diff
-git merge
+	git fetch
+	git diff
+	git merge
 
 
 checkout files with errors
-git checkout -- default.conf
+	git checkout -- default.conf
 
 force updates
-git fetch --all
-git reset --hard origin/master
+	git fetch --all
+	git reset --hard origin/master
 
 force push
-$ git push --force origin <branch-name>
+	git push --force origin <branch-name>
 
+update remote with back up
+create another branch in the server
+
+	git branch backup
+	git checkout backup
+	git add . && 
+	git commit -m "backup" && 
+	git push --force origin backup
+
+revert back to original branch
+	git checkout master
