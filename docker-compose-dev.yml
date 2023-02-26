@@ -74,7 +74,7 @@ services:
   certbot:
     image: certbot/certbot
     container_name: certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 #    depends_on:
 #      - nginx
     networks:
@@ -85,8 +85,9 @@ services:
       #       - vhost:/etc/nginx/vhost.d
       - ./docker/certbot/conf:/etc/letsencrypt
       - ./docker/certbot/www:/var/www/certbot
+    command: certonly --webroot --webroot-path=/var/www/html --email info@geospatialdev.com -d geospatialdev.com  -d www.geospatialdev.com
     #    command: certonly --webroot -w /var/www/certbot --force-renewal --email {EMAIL} -d {DOMAIN} --agree-tos
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email info@geospatialdev.com -d geospatialdev.com  -d www.geospatialdev.com -d web.geospatialdev.com  -d www.web.geospatialdev.com --agree-tos
+#    command: certonly --webroot -w /var/www/certbot --force-renewal --email info@geospatialdev.com -d geospatialdev.com  -d www.geospatialdev.com -d web.geospatialdev.com  -d www.web.geospatialdev.com --agree-tos
 
   postgres-db:
     restart: "on-failure"
