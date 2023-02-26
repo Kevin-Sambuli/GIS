@@ -18,4 +18,5 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 RUN apt install certbot python3-certbot-nginx -y
 
 
+#certbot --nginx -d geospatialdev.com -d www.geospatialdev.com -d web.geospatialdev.com
 
