@@ -79,6 +79,8 @@ services:
 #      - nginx
     networks:
       - api
+    stdin_open: true
+    tty: true
     volumes:
       #   - certs:/etc/nginx/certs
       #       - html:/usr/share/nginx/html
