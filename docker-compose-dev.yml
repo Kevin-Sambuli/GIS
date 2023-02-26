@@ -78,9 +78,7 @@ services:
 #    depends_on:
 #      - nginx
     networks:
-      - frontend
       - api
-      - backend
     volumes:
       #   - certs:/etc/nginx/certs
       #       - html:/usr/share/nginx/html
