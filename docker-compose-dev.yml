@@ -75,8 +75,8 @@ services:
     image: certbot/certbot
     container_name: certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    depends_on:
-      - nginx
+#    depends_on:
+#      - nginx
     networks:
       - frontend
       - api
