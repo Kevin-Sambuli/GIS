@@ -1,22 +1,22 @@
-check updates
+check for updates without affecting local changes
 	git fetch
 	git diff
 	git merge
 
-
+in the merge and replace them
 checkout files with errors
 	git checkout -- default.conf
 
-force updates
+force local updates from origin
 	git fetch --all
 	git reset --hard origin/master
 
 force push
 	git push --force origin <branch-name>
 
-update remote with back up
-create another branch in the server
-
+update remote with back up branch
+   create another branch in the local server
+ 
 	git branch backup
 	git checkout backup
 	git add . && 
@@ -24,4 +24,14 @@ create another branch in the server
 	git push --force origin backup
 
 revert back to original branch
-	git checkout master
+	git checkout master or
+	git switch
+
+change local repo with origin without affecting local changes
+	git stash - to store local changes first
+	git pull - to load origin changes
+	git stash pop - to merge both changes
+
+If you want to do a git pull and discard any local changes
+	git fetch origin
+	git reset --hard origin/<branch-name>
