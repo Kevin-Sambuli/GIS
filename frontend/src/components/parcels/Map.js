@@ -43,7 +43,7 @@ const MapElement = () => {
 
     return (
         // <MapContainer bounds={outerBounds} scrollWheelZoom={false}>
-        <MapContainer layers={[basemaps.OpenStreetMaps]} center={center} zoomSnap={0.5} minZoom={12} zoom={12}
+        <MapContainer className='mapContainer' layers={[basemaps.OpenStreetMaps]} center={center} zoomSnap={0.5} minZoom={12} zoom={12}
                       attributionControl={false} scrollWheelZoom={false}>
             <LayersControl collapsed={true} position="topright">
                 <BaseLayers></BaseLayers>

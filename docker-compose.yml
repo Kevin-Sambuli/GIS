@@ -90,6 +90,7 @@ services:
     hostname: geoserver
     volumes:
       - ./data/geodata:/opt/geoserver/data_dir
+      - ./docker/certbot/certs/live/geospatialdev.com:/etc/certs
     depends_on:
       - postgres-db
     networks:
@@ -107,6 +108,7 @@ services:
       - MAXIMUM_MEMORY=${MAXIMUM_MEMORY}
       - STABLE_EXTENSIONS=${STABLE_EXTENSIONS}
       - COMMUNITY_EXTENSIONS=${COMMUNITY_EXTENSIONS}
+      - SSL=true
 
 #  redis:
 #    restart: unless-stopped
@@ -149,13 +151,14 @@ services:
     build:
       context: ./docker/nginx/prod
     container_name: nginx
-    depends_on:
-      - certbot
+#    depends_on:
+#      - certbot
     volumes:
       - ./docker/nginx/prod/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./web:/home/web # serving index.html
       - static_volume:/home/api/static # sharing volumes with django to allow nginx to serve static files
       - media_volume:/home/api/media
+      - ./docker/certbot/certs:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
@@ -163,22 +166,22 @@ services:
       - frontend
       - backend
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    depends_on:
-      - nginx
-    networks:
-      - frontend
-      - backend
-    volumes:
-      #   - certs:/etc/nginx/certs
-  #       - html:/usr/share/nginx/html
-  #       - vhost:/etc/nginx/vhost.d
-      - ./docker/certbot/conf:/etc/letsencrypt:rw
-      - ./docker/certbot/www:/var/www/certbot:rw
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email {EMAIL} -d {DOMAIN} --agree-tos
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+#    depends_on:
+#      - nginx
+#    networks:
+#      - frontend
+#      - backend
+#    volumes:
+#      #   - certs:/etc/nginx/certs
+#  #       - html:/usr/share/nginx/html
+#  #       - vhost:/etc/nginx/vhost.d
+#      - ./docker/certbot/conf:/etc/letsencrypt:rw
+#      - ./docker/certbot/www:/var/www/certbot:rw
+#    command: certonly --webroot -w /var/www/certbot --force-renewal --email {EMAIL} -d {DOMAIN} --agree-tos
 
 
 #  certbot:

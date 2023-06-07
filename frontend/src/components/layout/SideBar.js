@@ -28,20 +28,20 @@ const Sidebar = ({children}) => {
     return (
         <Fragment>
             {/*bg-gradient-to-r from-green-800 to-transparent*/}
-            <div className={`${open ? 'w-72' : 'w-20'}  bg-emerald-600  duration-300 h-screen pl-2 pt-2  relative`}>
+            <div className={`${open ? 'w-72' : 'w-20'} border-r-2 border-emerald-500 bg-gray-200 duration-300 h-screen pl-2 pt-2 text-black relative font-sans font-bold`}>
                     <img onClick={toggle}
                          src={control}
                          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-15 border-2 border-dark-purple z-50 ${!open && "rotate-180"}`}/>
                     <div className={"flex gap-x-4 items-center"}>
                         <img src={logo} width="80px" height="90px" style={{borderRadius: '50%'}}
                              className={`cursor-pointer duration-500 ${!open && 'scale-0'}`}/>
-                        <h1 className={`text-white origin-left font-bold text-xl duration-300`}>WebGIS</h1>
+                        <h1 className={`text-green-600 origin-left font-bold text-xl duration-300 ${!open && 'scale-0'}`}>WebGIS</h1>
                     </div>
                     <ul className="pt-6">
                         {Menus.map((Menu, index) => (
                             <Link to={Menu.path}
                                 key={index}
-                                className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+                                className={`flex rounded-md p-2 cursor-pointer hover:bg-emerald-300 text-slate-950 text-sm items-center gap-x-4 
                                   ${Menu.gap ? "mt-9" : "mt-2"} ${ index === 0 && "bg-light-white"} `}
                             >
                                 <img src={Menu.icon}/>

@@ -18,6 +18,7 @@ def color_producer(perimeter):
 
 def my_map(land_parcels, parcel=None, lat=None, lng=None):
     extent = [-1.22488, 36.82467]
+    
     m = folium.Map(
         location=extent,
         min_zoom=8,

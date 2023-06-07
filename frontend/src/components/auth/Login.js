@@ -14,11 +14,11 @@ const Login = (props) => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    const {email, password} = formData;
-
     const changeHandler = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value.trim()});
     };
+
+    const {email, password} = formData;
 
     const submitHandler = (e) => {
         e.preventDefault();

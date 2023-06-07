@@ -2,10 +2,12 @@
     display: none;
   }
 
+
 .leaflet-container {
   width: 100%;
   position: relative;
-  height: calc(100vh - 56px);
+  /*height: calc(100vh - 56px);*/
+  height: 100vh;
   z-index: 1;
 }
 

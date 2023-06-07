@@ -4,7 +4,8 @@
   opacity: .9;
   width: 500px;
   left: -500px;
-  height: calc(100vh - 57px);
+  /*height: calc(100vh - 57px);*/
+  height: 100vh;
   position: absolute;
   z-index: 1001;
   transition: .5s left;

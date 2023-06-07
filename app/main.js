@@ -1,5 +1,7 @@
-// var serverPort = 'localhost:8080';
-var serverPort = 'web.geospatialdev.com/geoserver/';
+var serverPort = 'app.geospatialdev.com/geoserver/';
+var protocol = 'https://'
+// var serverPort = 'localhost:8080/geoserver/';
+// var serverPort = 'web.geospatialdev.com/geoserver/';
 var geoserverWorkspace = 'data';
 var countyLayerName = 'counties';
 var subCountyLayer = 'subcounties';
@@ -172,7 +174,7 @@ var osmKenyaTile = new ol.layer.Tile({
     title: 'Kenya',
     type: 'base',
     source: new ol.source.WMTS({
-        url: 'https://' + serverPort + 'gwc/service/wmts',
+        url: protocol + serverPort + 'gwc/service/wmts',
         layer: 'osm:kenya',
         format: 'image/png',
         matrixSet: projectionName, //'EPSG:4326'
@@ -190,7 +192,8 @@ var osmKenyaTile = new ol.layer.Tile({
 var baseGroup = new ol.layer.Group({
     title: 'Base Maps',
     fold: true,
-    layers: [osmTile, toner, osmKenyaTile, noneTile]
+    // layers: [osmTile, toner, osmKenyaTile, noneTile]
+    layers: [osmTile, toner, noneTile]
     // layers: [osmTile, noneTile]
 });
 
@@ -198,7 +201,7 @@ var kenyRoadsTile = new ol.layer.Image({
     title: "roads",
     visible: true,
     source: new ol.source.ImageWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: protocol + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + roads, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -208,7 +211,7 @@ var populationTile = new ol.layer.Tile({
     title: "population",
     visible: false,
     source: new ol.source.TileWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + poplationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -220,7 +223,7 @@ var sublocationTile = new ol.layer.Tile({
     // minZoom: 15,
     // maxZoom: 25,
     source: new ol.source.TileWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: protocol + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + sublocationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -232,7 +235,7 @@ var locationTile = new ol.layer.Tile({
     minZoom: 10,
     maxZoom: 20,
     source: new ol.source.TileWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: protocol + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + locationLayerName, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -244,7 +247,7 @@ var subCountyTile = new ol.layer.Image({
     // minZoom: 8,
     // maxZoom: 14,
     source: new ol.source.ImageWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: protocol + serverPort + geoserverWorkspace + '/wms',
         params: {'LAYERS': geoserverWorkspace + ':' + subCountyLayer, 'TILED': true},
         serverType: 'geoserver',
     })
@@ -256,7 +259,7 @@ var countyTile = new ol.layer.Image({
     // minZoom: 2,
     // maxZoom: 9,
     source: new ol.source.ImageWMS({
-        url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+        url: 'http://' + serverPort + geoserverWorkspace + '/wms',
         serverType: 'geoserver',
         params: {'LAYERS': geoserverWorkspace + ':' + countyLayerName, 'TILED': true},
     })
@@ -273,7 +276,8 @@ var administration = new ol.layer.Group({
     'title': 'Administrative',
     fold: true,
     visible: true,
-    layers: [sublocationTile, locationTile, subCountyTile, countyTile],
+    // layers: [sublocationTile, locationTile, subCountyTile, countyTile],
+    layers: [countyTile],
 });
 
 
@@ -687,7 +691,7 @@ featureInfoButton.addEventListener("click", () => {
 //             layer_title[i] = overlayGroup.getLayers().item(i).get('title');
 //
 //             wmsSource[i] = new ol.source.ImageWMS({
-//                 url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+//                 url: protocol + serverPort + geoserverWorkspace + '/wms',
 //                 params: {'LAYERS': layer_title[i]},
 //                 serverType: 'geoserver',
 //                 crossOrigin: 'anonymous'
@@ -1092,7 +1096,7 @@ function add_layer() {
         title: name[1],
         visible: true,
         source: new ol.source.ImageWMS({
-            url: 'https://' + serverPort + geoserverWorkspace + '/wms',
+            url: protocol + serverPort + geoserverWorkspace + '/wms',
             params: {'LAYERS': layer_name},
             ratio: 1,
             serverType: 'geoserver'
@@ -1104,7 +1108,7 @@ function add_layer() {
     overlayGroup.getLayers().push(layer_wms)
     console.log(overlayGroup.getLayers())
 
-    var url = 'https://' + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
+    var url = protocol + serverPort + geoserverWorkspace + '/wms?request=getCapabilities';
 
     // format for reading Map server getcapabilities for wms
     var parser = new ol.format.WMSCapabilities();
@@ -1638,7 +1642,7 @@ startEditingButton.addEventListener("click", () => {
             source: new ol.source.Vector({
                 format: new ol.format.GeoJSON(),
                 url: function (extent) {
-                    return 'https://' + serverPort + geoserverWorkspace + '/ows?service=WFS&' +
+                    return protocol + serverPort + geoserverWorkspace + '/ows?service=WFS&' +
                         'version=1.0.0&request=GetFeature&typeName=' + editLayer + '&' +
                         'outputFormat=application/json&srsname=EPSG:4326&' +
                         'bbox=' + extent.join(',') + ',EPSG:4326';

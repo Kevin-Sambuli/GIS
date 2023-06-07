@@ -9,7 +9,8 @@ from .resources.models import SubLocations, Locations, SubCounties, Nairobi
 
 
 class ParcelsFilter(GeoFilterSet):
-    region = filters.CharFilter(method="get_parcel_by_sublocation", lookup_expr="within")
+    region = filters.CharFilter(method="get_parcel_by_sub_county", lookup_expr="within")
+    # region = filters.CharFilter(method="get_parcel_by_sublocation", lookup_expr="within")
     # slug = filters.CharFilter(name='slug', lookup_expr='istartswith')
     # contains_geom = GeometryFilter(name='geom', lookup_expr='contains')
 

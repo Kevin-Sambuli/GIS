@@ -1,7 +1,7 @@
-// var serverPort = 'localhost:8081/geoserver/';
+var serverPort = 'localhost:8080/geoserver/';
 // var serverPort = 'localhost/geoserver/';
 
-var serverPort = 'web.geospatialdev.com/geoserver/';
+// var serverPort = 'web.geospatialdev.com/geoserver/';
 // var serverPort = 'geospatialdev.com/geoserver/';
 // var serverPort = 'geospatialdev.com:8081/geoserver/';
 
@@ -192,7 +192,8 @@ var administration = new ol.layer.Group({
     'title': 'Administrative',
     fold: true,
     visible: true,
-    layers: [subLocationLayer, locationLayer, subCountyLayer, countiesLayer ],
+    // layers: [subLocationLayer, locationLayer, subCountyLayer, countiesLayer ],
+    layers: [countiesLayer ],
 });
 // map.addLayer(population);
 // console.log(administration.getLayers())
@@ -228,7 +229,8 @@ var admin = new ol.layer.Tile({
         serverType: 'geoserver',
     })
 });
-overlays.getLayers().push(admin);
+// overlays.getLayers().push(admin);
+
 // overlays.getLayers().push(countiesLayer);
 // overlays.getLayers().push(subCountyLayer);
 

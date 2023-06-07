@@ -684,6 +684,16 @@ var counties = L.tileLayer.wms("http://localhost:8080/geoserver/kenya/wms",
         attribution: attribution
     });
 
+var roads = L.tileLayer.wms("http://localhost:8080/geoserver/kenya/wms",
+    {
+        layers: 'kenya:road',
+        format: 'image/png',
+        tiled: true,
+        transparent: true,
+        attribution: attribution
+    });
+
+
 var geo = L.Geoserver.wms("http://localhost:8080/geoserver/webgis/wms",
     {
         layers: 'kenya:parcels',
@@ -1183,6 +1193,7 @@ function zoomToFeature(e) {
         // "Overlaf": {
         "Georeferenced": imgoverlay,
         "Nairobi": nairobiPlots,
+        "Roads": roads,
         "County (WMS)": counties,
         "Population  (WMS)": population,
         "wfsLayer (WFS)": wfsLayer,

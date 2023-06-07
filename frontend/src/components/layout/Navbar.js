@@ -3,7 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {logout} from "../../redux/api/api";
 import './NavBar.css';
-import logo from '../../assets/Web-GIS.png';
+// import logo from '../../assets/Web-GIS.png';
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {far} from "@fortawesome/free-regular-svg-icons";
@@ -110,7 +110,7 @@ const Navbar = () => {
 
     return (
         // g-gradient-to-l from-green-800 to-transparent bg-green-300
-        <nav className="sticky top-0 w-full h-14 bg-gradient-to-l from-teal-700 via-cyan-800 to-emerald-100 z-10 shadow-xl shadow-zinc-600 ">
+        <nav className="sticky top-0 w-full h-14 bg-gradient-to-l from-teal-700 via-cyan-800 to-emerald-100 z-10 ">
         {/*<nav className="sticky top-0 w-full h-14 bg-gradient-to-l from-green-800 to-transparent bg-green-300 z-10 shadow-xl shadow-zinc-600 ">*/}
             <div className="container max-w-5xl">
                 <div className="flex flex-row py-1 items-center">

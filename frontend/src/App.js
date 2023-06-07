@@ -44,14 +44,15 @@ function App() {
     //     }
     // }, [access]);
     //
-     // when using the custom fetch hook
-     let getNotes = async() => {
-        let {response, data} = await api('/api/notes/')
 
-        if(response.status === 200){
-            setNotes(data)
+     // when using the custom fetch hook
+     let getNotes = async () => {
+        let {response, data} = await api('/api/notes/');
+
+        if (response.status === 200) {
+            setNotes(data);
         }
-    }
+    };
 
 
     return (
@@ -59,19 +60,20 @@ function App() {
             <Switch>
                 {/*<Route path='/about'><About/></Route>*/}
                 <Route path='/' exact> <Home/> </Route>
+                <Route path='/dashboard' exact> <Dashboard/> </Route>
                 <Route path='/signup'> <Signup/> </Route>
                 <Route path='/login'> <Login/> </Route>
+                {/*<Route path='/login'> <Logout/> </Route>*/}
                 <Route path='/map'> <MapElement/> </Route>
                 <Route path='/data'> <GeoData/> </Route>
                 <Route path='/about'> <About/> </Route>
                 <Route path='/analytics'> <Analytics/> </Route>
-                {/*<Route path='/dashboard'> <Dashboard/> </Route>*/}
 
                 <Route path='/activate/:uid/:token'> <Activate/> </Route>
                 <Route path='/reset-password'> <ResetPassword/> </Route>
                 <Route path='/password/reset/confirm/:uid/:token'> <ResetPasswordConfirm/> </Route>
                 <Route path='*'><Redirect to='/'/></Route>
-                {/*<Route path='*'> <NotFound /></Route>*/}
+                <Route path='*'> <NotFound /></Route>
             </Switch>
         </Layout>
     );

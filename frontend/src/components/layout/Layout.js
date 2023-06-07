@@ -21,8 +21,10 @@ const Layout = (props) => {
             <div className="flex">
                 <Sidebar/>
                 <div className={"text-2xl w-full h-screen h-full font-semibold"}>
-                    <Navbar/>
-                    <main className="main">{props.children}</main>
+                    {/*<Navbar/>*/}
+                    <div className="mainContent ">
+                        <main className="main bg-emerald-300 w-full h-screen h-full">{props.children}</main>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
