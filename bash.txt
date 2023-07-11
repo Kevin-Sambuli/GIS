@@ -3,6 +3,9 @@ pg_dumpall -h 127.0.0.1 U postgres -W | gzip > geodev_01_03_2023.gz
 pg_dumpall -U postgres > geodev_01_03_2023.sql
 
 
+# bash
+
+
 # Database administrative login by Unix domain socket
 local   all             postgres                                trust
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
