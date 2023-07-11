@@ -11,7 +11,7 @@ var map = L.map('map', {
     minZoom: 7
 }).setView([0.4, 38], 7)
 
-// map.setMaxBounds(map.getBounds());
+map.setMaxBounds(map.getBounds());
 
 // Get Map's Center
 var centerBounds = map.getBounds().getCenter();
