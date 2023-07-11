@@ -57,7 +57,8 @@ services:
       context: ./docker/nginx/dev
     container_name: nginx
     volumes:
-      - ./web:/home/web # serving index.html
+      # - ./web:/home/web # serving index.html
+      - ./GRI:/home/web # serving index.html
       - static_volume:/home/api/static
       - media_volume:/home/api/media
       - ./docker/certbot/certs:/etc/letsencrypt

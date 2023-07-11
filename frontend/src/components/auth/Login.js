@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
 import {loginUser} from "../../redux/api/api";
 import axios from "axios";
+import './Login.css'
 
 
 const Login = (props) => {
@@ -44,60 +45,72 @@ const Login = (props) => {
     };
 
     if (isAuthenticated) {
-        return <Redirect to={'/'}/>
+        return <Redirect to={'/map'}/>
     }
     ;
-    
-        return (
+
+    return (
         <>
-            <div className='container mt-5'>
-                <h3>Sign In</h3>
-                <p>Sign into your Account</p>
-                <form onSubmit={submitHandler}>
-                    <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='email'
-                            placeholder='Email'
-                            name='email'
-                            value={email}
-                            onChange={changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            value={password}
-                            onChange={changeHandler}
-                            // minLength='6'
-                            required
-                        />
-                    </div>
-                    <button
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        type='submit'>Login
-                    </button>
-                </form>
-                <button className='btn btn-danger mt-3' onClick={continueWithGoogle}>
-                    Continue With Google
-                </button>
-                <br/>
-                {/*<button className='btn btn-primary mt-3' onClick={continueWithFacebook}>*/}
-                {/*    Continue With Facebook*/}
-                {/*</button>*/}
-                <p className='mt-3'>
-                    Don't have an account? <Link
-                    className='font-medium text-blue-600 dark:text-blue-500 hover:underline' to='/signup'>Sign Up</Link>
-                </p>
-                <p className='mt-3'>
-                    Forgot your Password? <Link className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
-                                                to='/reset-password'>Reset Password</Link>
-                </p>
-            </div>
+                        <div className="w-full bg-slate-200 z-40 opacity-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                            <div className="items-center p-6 space-y-4 md:space-y-6 sm:p-8">
+
+                                <h1 className="text-xl items-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                                    Sign in to your account
+                                </h1>
+
+                                <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
+                                    <div>
+                                        <input type="email"
+                                               name="email"
+                                               id="email"
+                                               value={email}
+                                               onChange={changeHandler}
+                                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder="name@company.com"
+                                               required=""/>
+                                    </div>
+
+                                    <div>
+                                        <input type="password"
+                                               name="password"
+                                               id="password"
+                                               value={password}
+                                               onChange={changeHandler}
+                                               placeholder="••••••••"
+                                               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               required=""/>
+                                    </div>
+
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-start">
+                                            <div className="flex items-center h-5">
+                                                <input id="remember" aria-describedby="remember" type="checkbox"
+                                                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                                                       required=""/>
+                                            </div>
+                                            <div className="ml-3 text-sm">
+                                                <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                                            </div>
+                                        </div>
+
+                                        <Link to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline">Forgot password?</Link>
+
+                                    </div>
+
+                                    <hr></hr>
+
+                                    <button type='submit' className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg
+                                        text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                    >Login </button>
+
+                                    <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                                        Don’t have an account yet?
+                                        <Link to="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
+                                    </p>
+
+                                </form>
+                            </div>
+                        </div>
         </>
     );
 };
