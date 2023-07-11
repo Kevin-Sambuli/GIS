@@ -1,7 +1,11 @@
+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
+
+
 check for updates without affecting local changes
 	git fetch
 	git diff
 	git merge
+
 
 in the merge and replace them
 checkout files with errors
