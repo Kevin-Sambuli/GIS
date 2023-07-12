@@ -162,7 +162,7 @@ function makePopupContent() {
                 <hr class="m-2">
                 
                 <div class="p-2 image">
-                    <img src="../assets/kenya.png">
+                    <img src="../assets/kenya3.png">
                 </div>
                 
                 <hr class="m-2">
@@ -185,7 +185,7 @@ var marker = L.marker([1, 40], {
 var popup = marker
     .bindPopup(makePopupContent())
     .addTo(map)
-    .openPopup();
+    // .openPopup();
 
 
 L.marker([-2, 36], {
@@ -193,7 +193,7 @@ L.marker([-2, 36], {
     title: "Click to Open",
 }).bindPopup(makePopupContent())
     .addTo(map)
-    .openPopup();
+    // .openPopup();
 
 
 
